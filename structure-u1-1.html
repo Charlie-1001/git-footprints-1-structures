@@ -1,0 +1,81 @@
+<!DOCtYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>How old are you? I am _______.</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+
+  <body>
+    <h1 class="game-title">How old are you? I am _______.</h1>
+
+    <!-- The summary panel -->
+    <div class="summary-panel">
+      <h2>Winners</h2>
+      <div id="summaryAnimation"></div>
+      <div class="summary-team" id="summaryTeam"></div>
+    </div>
+
+    <!-- The game container -->
+    <div class="container">
+      <!-- Team 1 -->
+      <div class="team" id="team1">
+        <div class="team-header">
+          <input type="text" class="team-name" id="teamName1" value="Team-1"></input>
+          <div class="score">Score: <span id="score1">0</span></div>
+        </div>
+
+        <div class="check-panel">
+          <img class="check-btn" id="correctBtn1" src="./images/correct-btn-removebg-preview.png">
+          <img class="done-btn" src="./images/done-btn-removebg-preview.png">
+          <img class="check-btn" id="wrongBtn1" src="./images/incorrect-btn-removebg-preview.png">
+        </div>
+
+        <div class="dropzone" id="dropzone1"></div>
+
+        <!-- The panel containing the structures -->
+        <div class="letter-panel" id="letterPanel1"></div>
+      </div>
+
+      <!-- Team 2 -->
+      <div class="team" id="team2">
+        <div class="team-header">
+          <input type="text" class="team-name" id="teamName2" value="Team-2"></input>
+          <div class="score">Score: <span id="score2">0</span></div>
+        </div>
+
+        <div class="check-panel">
+          <img class="check-btn" id="correctBtn2" src="./images/correct-btn-removebg-preview.png">
+          <img class="done-btn" src="./images/done-btn-removebg-preview.png">
+          <img class="check-btn" id="wrongBtn2" src="./images/incorrect-btn-removebg-preview.png">
+        </div>
+
+        <div class="dropzone" id="dropzone2"></div>
+        <!-- The panel containing the structures -->
+        <div class="letter-panel" id="letterPanel2"></div>
+      </div>
+    </div>
+
+    <!-- Javascript section -->
+    <script>
+      // --- STRUCTURES SETUP ---
+      const wordInputs = [
+        "How old are you ?",
+        "I am seven .",
+        "I am four .",
+        "I am eight .",
+        "How old are you ?",
+        "I am six .",
+        "I am five .",
+        "I am nine .",
+        "How old are you ?",
+        "I am ten .",
+        "I am twelve .",
+        "I am thirteen ."
+      ] 
+    </script>
+    <script src="script.js"></script>
+
+  </body>
+</html>
