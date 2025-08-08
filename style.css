@@ -20,11 +20,7 @@ body {
 }
 
 .container {
-  display: flex;
-  justify-content: space-around;
   height: 100%;
-  flex-wrap: wrap;
-  position: relative;
 }
 
 .game-title {
@@ -37,16 +33,21 @@ body {
   justify-content: center;
   color: white;
   border-bottom: 1px solid white;
-  position: absolute;
-  top: 0;
+  margin-bottom: 1%;
+}
+
+.team-container {
+  height: 88%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
 }
 
 .team {
   width: 49%;
-  height: 85%;
+  height: 100%;
   border: 1px solid white;
   border-radius: 1rem;
-  margin-top: 6%;
 }
 
 .team-header {
