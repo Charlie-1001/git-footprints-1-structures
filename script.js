@@ -16,6 +16,9 @@ const teamName2 = document.getElementById("teamName2");
 const score1 = document.getElementById("score1");
 const score2 = document.getElementById("score2");
 const summaryTeam = document.getElementById("summaryTeam");
+const correctSound = new Audio('./sounds/correct.mp3');
+const incorrectSound = new Audio('./sounds/incorrect.mp3');
+const victorySound = new Audio('./sounds/victory.mp3');
 
 // --- MULTI-TOUCH TRACKING ---
 const touchDrags = new Map();
@@ -113,7 +116,8 @@ function onDrop(e) {
     const target = document.elementFromPoint(clientX, clientY);
     const dropzone = target?.closest('.dropzone');
     const letterPanel = target?.closest('.letter-panel');
-
+    console.log(dropzone);
+    
     if ((dropzone && dropzone.closest('.team').id === bubble.dataset.team) || (letterPanel && letterPanel.closest('.letter-panel').id === bubble.dataset.panelOrigin)) {
       const dropOptions = dropzone ? dropzone : letterPanel;
       const newBubble = bubble;
@@ -196,7 +200,8 @@ unscrumble2.forEach(word => {
 
 // --- CHECK ANSWERS ---
 function correctAnswer(score, dropzone) {
-  const correctSound = new Audio('./sounds/correct.mp3');
+  correctSound.pause();
+  correctSound.currentTime = 0;
   correctSound.play();
   score.innerText = parseInt(score.innerText) + 5;
 
@@ -211,7 +216,8 @@ function correctAnswer(score, dropzone) {
 }
 
 function wrongAnswer(score, dropzone) {
-  const incorrectSound = new Audio('./sounds/incorrect.mp3');
+  incorrectSound.pause();
+  incorrectSound.currentTime = 0;
   incorrectSound.play();
   score.innerText = parseInt(score.innerText) - 2;
 
@@ -260,7 +266,6 @@ function determineWinners() {
     summaryTeam.innerHTML = `🥇 ${teamName2.value}: Score: ${score2Value} <br> 🥈 ${teamName1.value}: Score: ${score1Value}`;
   }
 
-  const victorySound = new Audio('./sounds/victory.mp3');
   victorySound.play();
   summaryVideo();
 }
