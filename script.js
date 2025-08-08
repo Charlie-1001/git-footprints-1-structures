@@ -21,11 +21,12 @@ const summaryTeam = document.getElementById("summaryTeam");
 const touchDrags = new Map();
 
 // --- BUBBLE CREATION ---
-function createBubble(letter, teamId) {
+function createBubble(letter, teamId, panel) {
   const bubble = document.createElement('div');
   bubble.className = 'bubble';
   bubble.textContent = letter;
   bubble.dataset.team = teamId;
+  bubble.dataset.panelOrigin = panel;
 
   bubble.addEventListener('touchstart', startDrag, { passive: false });
   bubble.addEventListener('mousedown', startDrag);
@@ -47,6 +48,8 @@ function startDrag(e) {
 
     const target = e.currentTarget;
     const letterPanel = target.closest('.letter-panel');
+    const originalParent = target.parentNode;
+    const originalNextSibling = target.nextSibling;
     const rect = target.getBoundingClientRect();
     const offsetX = clientX - rect.left;
     const offsetY = clientY - rect.top;
@@ -56,11 +59,12 @@ function startDrag(e) {
     dragged.style.position = 'absolute';
     dragged.style.zIndex = '1000';
     dragged.dataset.team = target.dataset.team;
+    dragged.dataset.panelOrigin = target.dataset.panelOrigin;
     dragged.textContent = target.textContent;
     document.body.appendChild(dragged);
 
     moveAt(clientX, clientY, dragged, offsetX, offsetY);
-    touchDrags.set(id, { bubble: dragged, offsetX, offsetY });
+    touchDrags.set(id, { bubble: dragged, offsetX, offsetY, originalParent, originalNextSibling });
 
     if (isTouch) {
       document.addEventListener('touchmove', onMove, { passive: false });
@@ -84,6 +88,7 @@ function onMove(e) {
 
     moveAt(touch.clientX, touch.clientY, dragData.bubble, dragData.offsetX, dragData.offsetY);
   }
+  
 }
 
 function moveAt(x, y, bubble, offsetX, offsetY) {
@@ -95,6 +100,7 @@ function moveAt(x, y, bubble, offsetX, offsetY) {
 function onDrop(e) {
   const isTouch = e.type === 'touchend';
   const touches = isTouch ? e.changedTouches : [e];
+  document.body.style.cursor = '';
 
   for (const touch of touches) {
     const id = isTouch ? touch.identifier : 'mouse';
@@ -108,32 +114,37 @@ function onDrop(e) {
     const dropzone = target?.closest('.dropzone');
     const letterPanel = target?.closest('.letter-panel');
 
-    if (dropzone && dropzone.closest('.team').id === bubble.dataset.team) {
-      const newBubble = document.createElement('div');
-      newBubble.className = 'new-bubble';
-      newBubble.textContent = bubble.textContent;
-      newBubble.dataset.team = bubble.dataset.team;
-      newBubble.style.cursor = 'pointer';
+    if ((dropzone && dropzone.closest('.team').id === bubble.dataset.team) || (letterPanel && letterPanel.closest('.letter-panel').id === bubble.dataset.panelOrigin)) {
+      const dropOptions = dropzone ? dropzone : letterPanel;
+      const newBubble = bubble;
+      newBubble.classList.add('new-bubble');
+      newBubble.style.position = "";
+      newBubble.style.zIndex = "";
+      newBubble.classList.remove('dragging');
 
-      newBubble.addEventListener('touchstart', startDrag, { passive: false });
-      newBubble.addEventListener('mousedown', startDrag);
-
-      const all = Array.from(dropzone.querySelectorAll('.new-bubble'));
+      const all = Array.from(dropOptions.querySelectorAll('.new-bubble'));
       let inserted = false;
       for (let b of all) {
         const rect = b.getBoundingClientRect();
         if (clientX < rect.left + rect.width / 2) {
-          dropzone.insertBefore(newBubble, b);
+          dropOptions.insertBefore(newBubble, b);
           inserted = true;
           break;
         }
       }
-      if (!inserted) dropzone.appendChild(newBubble);
+      if (!inserted) dropOptions.appendChild(newBubble);
+    } else {
+      const { originalParent, originalNextSibling} = dragData;
+      bubble.style.position = "";
+      bubble.style.zIndex = "";
+      bubble.classList.remove('dragging');
+      if (originalNextSibling && originalParent.contains(originalNextSibling)) {
+        originalParent.insertBefore(bubble, originalNextSibling);
+      } else {
+        originalParent.appendChild(bubble);
+      }
     }
 
-    if (letterPanel) bubble.remove();
-
-    bubble.remove();
     touchDrags.delete(id);
 
     if (touchDrags.size === 0) {
@@ -154,7 +165,7 @@ function generateWords(dropzone) {
     const unscrumble1 = wordInputs[i1].split(" ").sort((a, b) => Math.random() - 0.5);
     letterPanel1.innerHTML = "";
     unscrumble1.forEach(word => {
-      const bubble1 = createBubble(word, 'team1');
+      const bubble1 = createBubble(word, 'team1', 'letterPanel1');
       letterPanel1.appendChild(bubble1);
     });
     i1 = i1 + 1;
@@ -163,7 +174,7 @@ function generateWords(dropzone) {
     const unscrumble2 = wordInputs[i2].split(" ").sort((a, b) => Math.random() - 0.5);
     letterPanel2.innerHTML = "";
     unscrumble2.forEach(word => {
-      const bubble2 = createBubble(word, 'team2');
+      const bubble2 = createBubble(word, 'team2', 'letterPanel2');
       letterPanel2.appendChild(bubble2);
     });
     i2 = i2 + 1;
@@ -173,13 +184,13 @@ function generateWords(dropzone) {
 // generate the very first words
 const unscrumble1 = wordInputs[0].split(" ").sort((a, b) => Math.random() - 0.5);
 unscrumble1.forEach(word => {
-  const bubble1 = createBubble(word, 'team1');
+  const bubble1 = createBubble(word, 'team1', 'letterPanel1');
   letterPanel1.appendChild(bubble1);
 });
 
 const unscrumble2 = wordInputs[0].split(" ").sort((a, b) => Math.random() - 0.5);
 unscrumble2.forEach(word => {
-  const bubble2 = createBubble(word, 'team2');
+  const bubble2 = createBubble(word, 'team2', 'letterPanel2');
   letterPanel2.appendChild(bubble2);
 });
 
