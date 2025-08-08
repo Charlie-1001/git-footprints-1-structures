@@ -136,16 +136,17 @@ body {
 
 .summary-panel {
   width: 50%;
-  height: 25rem;
-  margin: auto;
-  background-color: white;
-  border: 5px solid rgb(206, 150, 9);
+  height: 60%;
+  margin: 10% auto;
+  background-color: rgba(245, 178, 9, 0.5);
+  border: 1px solid white;
   border-radius: 1rem;
   padding: 1rem;
+  box-shadow: 0 0 15px rgb(240, 224, 6);
 }
 
 .summary-panel h2 {
-  color: rgb(206, 150, 9);
+  color: white;
   font-size: 3rem;
 }
 
@@ -156,12 +157,12 @@ body {
 
 .summary-animation {
   height: 100%;
-  border: 2px solid black;
+  border: 1px solid white;
   border-radius: 1rem;
 }
 
 .summary-team {
-  color: rgb(12, 152, 233);
+  color: white;
   font-size: 1.7rem;
   font-weight: bold;;
 }
@@ -179,12 +180,6 @@ body {
 
   .check-btn, .done-btn {
     height: 50%;
-  }
-
-  .new-bubble {
-    height: 4rem;
-    width: 5rem;
-    font-size: 2.5rem;
   }
 }
 
