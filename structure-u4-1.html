@@ -1,0 +1,83 @@
+<!DOCtYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>I've got (a) _______.</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+
+  <body>
+    <!-- The summary panel -->
+    <div class="summary-panel">
+      <h2>Winners</h2>
+      <div id="summaryAnimation"></div>
+      <div class="summary-team" id="summaryTeam"></div>
+    </div>
+
+    <!-- The game container -->
+    <div class="container">
+      <div class="game-title">
+        <h1>I've got (a) _______.</h1>
+      </div>
+
+      <div class="team-container">
+        <!-- Team 1 -->
+        <div class="team" id="team1">
+          <div class="team-header">
+            <input type="text" class="team-name" id="teamName1" value="Team-1"></input>
+            <div class="score">Score: <span id="score1">0</span></div>
+          </div>
+      
+          <div class="check-panel">
+            <img class="check-btn" id="correctBtn1" src="./images/correct-btn-removebg-preview.png">
+            <img class="done-btn" src="./images/done-btn-removebg-preview.png">
+            <img class="check-btn" id="wrongBtn1" src="./images/incorrect-btn-removebg-preview.png">
+          </div>
+      
+          <div class="dropzone" id="dropzone1"></div>
+      
+          <!-- The panel containing the structures -->
+          <div class="letter-panel" id="letterPanel1"></div>
+        </div>
+      
+        <!-- Team 2 -->
+        <div class="team" id="team2">
+          <div class="team-header">
+            <input type="text" class="team-name" id="teamName2" value="Team-2"></input>
+            <div class="score">Score: <span id="score2">0</span></div>
+          </div>
+      
+          <div class="check-panel">
+            <img class="check-btn" id="correctBtn2" src="./images/correct-btn-removebg-preview.png">
+            <img class="done-btn" src="./images/done-btn-removebg-preview.png">
+            <img class="check-btn" id="wrongBtn2" src="./images/incorrect-btn-removebg-preview.png">
+          </div>
+      
+          <div class="dropzone" id="dropzone2"></div>
+          <!-- The panel containing the structures -->
+          <div class="letter-panel" id="letterPanel2"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Javascript section -->
+    <script>
+      // --- STRUCTURES SETUP ---
+      const wordInputs = [
+        "I ' ve got a red coat .",
+        "I ' ve got blue gloves .",
+        "I ' ve got black trousers .",
+        "I ' ve got a purple skirt .",
+        "I ' ve got a white dress .",
+        "I ' ve got a blue shirt .",
+        "I ' ve got a grey jumper .",
+        "I ' ve got black socks .",
+        "I ' ve got a black t-shirt .",
+        "I ' ve got brown shoes .",
+      ] 
+    </script>
+    <script src="script.js"></script>
+
+  </body>
+</html>

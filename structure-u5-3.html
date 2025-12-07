@@ -1,0 +1,87 @@
+<!DOCtYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Is/Are ... good for you?</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+
+  <body>
+    <!-- The summary panel -->
+    <div class="summary-panel">
+      <h2>Winners</h2>
+      <div id="summaryAnimation"></div>
+      <div class="summary-team" id="summaryTeam"></div>
+    </div>
+
+    <!-- The game container -->
+    <div class="container">
+      <div class="game-title">
+        <h1>Is/Are ... good for you?</h1>
+      </div>
+
+      <div class="team-container">
+        <!-- Team 1 -->
+        <div class="team" id="team1">
+          <div class="team-header">
+            <input type="text" class="team-name" id="teamName1" value="Team-1"></input>
+            <div class="score">Score: <span id="score1">0</span></div>
+          </div>
+      
+          <div class="check-panel">
+            <img class="check-btn" id="correctBtn1" src="./images/correct-btn-removebg-preview.png">
+            <img class="done-btn" src="./images/done-btn-removebg-preview.png">
+            <img class="check-btn" id="wrongBtn1" src="./images/incorrect-btn-removebg-preview.png">
+          </div>
+      
+          <div class="dropzone" id="dropzone1"></div>
+      
+          <!-- The panel containing the structures -->
+          <div class="letter-panel" id="letterPanel1"></div>
+        </div>
+      
+        <!-- Team 2 -->
+        <div class="team" id="team2">
+          <div class="team-header">
+            <input type="text" class="team-name" id="teamName2" value="Team-2"></input>
+            <div class="score">Score: <span id="score2">0</span></div>
+          </div>
+      
+          <div class="check-panel">
+            <img class="check-btn" id="correctBtn2" src="./images/correct-btn-removebg-preview.png">
+            <img class="done-btn" src="./images/done-btn-removebg-preview.png">
+            <img class="check-btn" id="wrongBtn2" src="./images/incorrect-btn-removebg-preview.png">
+          </div>
+      
+          <div class="dropzone" id="dropzone2"></div>
+          <!-- The panel containing the structures -->
+          <div class="letter-panel" id="letterPanel2"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Javascript section -->
+    <script>
+      // --- STRUCTURES SETUP ---
+      const wordInputs = [
+        "Are apples good for you ?",
+        "Is pizza good for you ?",
+        "Are bananas good for you ?",
+        "Is salad good for you ?",
+        "Are chips good for you ?",
+        "Is chicken good for you ?",
+        "Is ice cream good for you ?",
+        "Are hamburgers good for you ?",
+        "Is chocolate good for you ?",
+        "Is yogurt good for you ?",
+        "Yes , it is .",
+        "Yes , they are .",
+        "No , it isn't .",
+        "No , they aren't .",
+      ] 
+    </script>
+    <script src="script.js"></script>
+
+  </body>
+</html>
